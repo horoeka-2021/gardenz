@@ -12,14 +12,14 @@ import {
   IfNotAuthenticated
 } from '../../components/Authenticated/Authenticated'
 import { getEventDetails, checkUserIdsMatch } from './emailVolunteerErrorHelper'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 import { getLogoutFn } from '../../auth-utils'
 import { clearUser } from '../../actions/user'
 
 export default function EmailVolunteerError () {
   const [event, setEvent] = useState({ title: '', gardenName: '' })
   const { userId, eventId } = useParams()
-  const history = useHistory()
+  const navigate = useNavigate()
   const browserFirstName = useSelector(
     (globalState) => globalState.user.firstName
   )
@@ -29,7 +29,7 @@ export default function EmailVolunteerError () {
 
   useEffect(() => {
     // eslint-disable-next-line promise/catch-or-return
-    getEventDetails(eventId, history).then((event) => {
+    getEventDetails(eventId, navigate).then((event) => {
       if (event) {
         setEvent({ title: event.title, gardenName: event.gardenName })
       }
@@ -40,11 +40,11 @@ export default function EmailVolunteerError () {
   function logOutSignIn () {
     logout()
     dispatch(clearUser())
-    history.push('/signin')
+    navigate('/signin')
   }
 
   function redirectToEvent () {
-    history.push(`/events/${eventId}`)
+    navigate(`/events/${eventId}`)
   }
 
   return (

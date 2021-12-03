@@ -26,7 +26,7 @@ afterAll(() => {
 const mockPush = jest.fn()
 jest.mock('react-router', () => ({
   ...jest.requireActual('react-router'),
-  useHistory: () => ({ push: mockPush })
+  useNavigate: () => mockPush
 }))
 
 jest.mock('react-router-dom', () => ({

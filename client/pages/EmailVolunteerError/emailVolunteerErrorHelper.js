@@ -3,7 +3,7 @@ import { showError } from '../../actions/error'
 import { dispatch } from '../../store'
 import { setWaiting, clearWaiting } from '../../actions/waiting'
 
-export function getEventDetails (id, history, consume = requestor) {
+export function getEventDetails (id, navigate, consume = requestor) {
   dispatch(setWaiting())
 
   return consume(`/events/${id}`)
@@ -12,7 +12,7 @@ export function getEventDetails (id, history, consume = requestor) {
 
       const event = res.body
       if (event.isVolunteer) {
-        history.push(`/events/${id}`)
+        navigate(`/events/${id}`)
         return null
       } else {
         return {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useFormik } from 'formik'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { registerUser } from './registerHelper'
 import { useAuth0 } from '@auth0/auth0-react'
 import { motion } from 'framer-motion'
@@ -24,7 +24,7 @@ const registerSchema = Yup.object().shape({
 
 export default function Register () {
   const authUser = useAuth0().user
-  const history = useHistory()
+  const navigate = useNavigate()
   const isAdmin = useSelector(globalState => globalState.user?.isAdmin)
 
   const formik = useFormik({
@@ -34,7 +34,7 @@ export default function Register () {
       gardenId: null
     },
     onSubmit: values => {
-      registerUser(values, isAdmin, authUser, history.push)
+      registerUser(values, isAdmin, authUser, navigate)
     },
     validationSchema: registerSchema
   })

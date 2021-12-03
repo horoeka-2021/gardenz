@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { addEvent } from './addEventHelper'
 import { motion } from 'framer-motion'
 
@@ -7,10 +7,10 @@ import EventForm from '../../../components/events/EventForm/EventForm'
 import { addEventVariants } from '../../animationVariants'
 
 export default function AddEvent () {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   function submitEvent (event) {
-    addEvent(event, history.push)
+    addEvent(event, navigate)
   }
   const initialState = {
     title: '',

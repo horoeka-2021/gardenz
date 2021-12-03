@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { waitFor } from '@testing-library/dom'
 
@@ -12,7 +12,7 @@ jest.mock('./addEventHelper')
 
 describe('form', () => {
   it('is empty', () => {
-    render(<AddEvent />)
+    renderWithRouter(<AddEvent />)
     const titleInput = screen.getByRole('textbox', { name: 'Event Title' })
     expect(titleInput).toHaveValue('')
   })
@@ -20,7 +20,7 @@ describe('form', () => {
 
 describe('submit button', () => {
   it('has "Create Event" name from props', () => {
-    render(<AddEvent />)
+    renderWithRouter(<AddEvent />)
     const addButton = screen.getByRole('button')
     expect(addButton).toHaveTextContent('Submit')
   })
