@@ -11,9 +11,7 @@ import { leftVariant, rightVariant } from '../animationVariants'
 
 export default function Garden () {
   const { id } = useParams()
-  const garden = useSelector(globalState => globalState.garden)
-  const user = useSelector(globalState => globalState.user)
-  const location = useSelector(globalState => globalState.location)
+  const { garden, user, location } = useSelector(globalState => globalState)
 
   useEffect(() => {
     user.id && getGarden(id, user)

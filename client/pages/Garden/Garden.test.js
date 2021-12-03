@@ -24,7 +24,9 @@ describe('Garden', () => {
         user: {
           id: 1
         }
-      }
+      },
+      route: '/:id',
+      initialEntries: ['/23']
     })
 
     // we need renderWithRedux even though Garden isn't connecting to the store
@@ -33,6 +35,7 @@ describe('Garden', () => {
       .then(() => {
         const url = screen.getByRole('link', { name: 'cooltestgarden.com' })
         expect(getGarden).toHaveBeenCalled()
+        expect(getGarden.mock.calls[0][0]).toEqual('23')
         expect(url).toBeInTheDocument()
         expect(url.href).toMatch('cooltestgarden.com')
         return null
